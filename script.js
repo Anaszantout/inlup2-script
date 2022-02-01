@@ -1,7 +1,7 @@
 const form = document.querySelector ('#todo-form');
-let input = document.querySelector('#input-group');
+const input = document.querySelector('#todo-input');
 const output = document.querySelector('#output');
-
+const Error = document.querySelector('#Error');
 
 let todos = [];
 
@@ -62,6 +62,25 @@ function removeTodo(id, todo) {
 }
 
 
+const validateTodoInput = (input) => {
+    
+   
+  if(input.value ===''){
+      Error.innerText='You should write TODO';
+      
+  }
+  else if (input.value.length < 2){
+      Error.innerText='TODO should be at least tow chars ';
+      
+  }
+  else {
+      Error.innerText='';
+   
+}
+}
+
+
+
 
 const createNewTodo = title => {
 
@@ -88,53 +107,23 @@ const createNewTodo = title => {
         })
     
 }
-const validate = (input) => {
-  
 
-    if(input.value.trim() === '') {
-      setError (input,'todo can not be empty')
+
+
+
+
+
+
+
+form.addEventListener('submit', e => {
+  e.preventDefault();
+ 
+  if (input.value !== validateTodoInput (input) ) {
+      createNewTodo(input.value);
+      input.value='';
       input.focus();
-      return false;
-    }
-    else if (input.value.trim().length < 2) {
-      setError(input,'todo must be atleast 2 chars long');
-      input.focus();
-      return false; 
-    }
-    else {
-        setSucsses (input);
-        return true;
-    }
-    
+      
   }
   
-
-
-
-  const setError = (input, textMessage) => {
-      const parent =input.parentElement;
-    input.classlist.add('Error');
-    
-    parent.querySelector('.Error').innerText = textMessage;
-
-
-  }
-  const setSucsses = input => {
-    const parent=input.parentElement;
-    input.classList.remove ('Error');
-    
-  }
-
-
-
-
-  form.addEventListener('submit', e => {
-    e.preventDefault();
-
-    if(input=validate) () => {
-     createNewTodo(input.value);
-     input.value='';
-    }
-
-    form.reset();
+  
 })

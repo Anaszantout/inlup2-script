@@ -77,7 +77,7 @@
     border-radius: 0 10px 10px 0 ;
 }
 
-.Error{
+#Error{
    position: absolute;
    margin-top: 3rem;
    margin-left:1rem ;
